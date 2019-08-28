@@ -1,0 +1,80 @@
+.text.globl funcion.type funcion, @functionpushl %ebpmovl %esp, %ebpsubl $4, %espmovl $1,%eax
+movl %eax,-4(%ebp);
+subl $4, %espmovl -4(%ebp),%eax
+pushl %eaxmovl $2,%eax
+movl %eax, %ebx;
+popl %eax;
+cdq;
+idivl %ebx,%eax;
+movl %eax,-8(%ebp);
+movl 8(%ebp),%eax
+start1:movl 12(%ebp),%eax
+pushl %eaxmovl -4(%ebp),%eax
+movl %eax, %ebx;
+popl %eax;
+cmpl %ebx,%eax;
+jne falseIGUAL1
+movl $1,%eax
+jmp finalIGUAL1
+falseIGUAL1:
+ movl $0,%eax
+finalIGUAL1:cmpl $0, %eaxje finalWhile1start2:movl 8(%ebp),%eax
+pushl %eaxmovl -4(%ebp),%eax
+movl %eax, %ebx;
+popl %eax;
+cmpl %ebx,%eax;
+jle falseMayor1
+movl $1,%eax
+jmp finalMayor1
+falseMayor1:
+movl $0,%eax
+finalMayor1:cmpl $0, %eaxje finalWhile2movl 8(%ebp),%eax
+pushl %eaxmovl -8(%ebp),%eax
+movl %eax, %ebx;
+popl %eax;
+cmpl %ebx,%eax;
+jle falseMayor2
+movl $1,%eax
+jmp finalMayor2
+falseMayor2:
+movl $0,%eax
+finalMayor2:cmp $0, %eaxjne false1movl 8(%ebp),%eax
+pushl %eaxmovl $1,%eax
+movl %eax, %ebx;
+popl %eax;
+addl %ebx,%eax;
+jmp finalIf1false1:movl 8(%ebp),%eax
+pushl %eaxmovl $1,%eax
+movl %eax, %ebx;
+popl %eax;
+subl %ebx,%eax;
+finalIf1:
+jmp start2finalWhile2:movl -8(%ebp),%eax
+pushl %eaxmovl $1,%eax
+movl %eax, %ebx;
+popl %eax;
+addl %ebx,%eax;
+movl %eax,12(%ebp);
+jmp start1finalWhile1:
+movl %ebp, %esppopl %ebpret
+.text.globl main.type main, @functionpushl %ebpmovl %esp, %ebpsubl $4, %espmovl $1,%eax
+movl %eax,-4(%ebp);
+subl $4, %espmovl -4(%ebp),%eax
+movl %eax,-8(%ebp);
+subl $4, %espmovl -8(%ebp),%eax
+subl $4,%espmovl %eax, -16(%ebp)movl -4(%ebp),%eax
+subl $4,%espmovl %eax, -20(%ebp)
+movl -20(%ebp),%eaxaddl $4,%esppushl %eax
+movl -16(%ebp),%eaxaddl $4,%esppushl %eax
+call funcion;
+addl $8,(%esp)
+movl %eax,-12(%ebp);
+movl -12(%ebp),%eax
+subl $4,%espmovl %eax, -16(%ebp)movl -16(%ebp),%eaxaddl $4,%esppushl %eaxmovl $s0, %eax
+pushl %eax
+call printf;addl $8,(%esp)movl $1,%eax
+movl %eax,$variable;
+movl -12(%ebp),%eax
+
+cmpl $0, %eaxje distinto1movl $1, %eaxdistinto1:
+movl %ebp, %esppopl %ebpret
